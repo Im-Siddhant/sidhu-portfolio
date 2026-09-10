@@ -1,12 +1,2 @@
-create schema if not exists private;
-alter function public.handle_new_user() set schema private;
-alter function public.is_admin() set schema private;
-alter function public.is_admin_or_editor() set schema private;
-alter function public.set_updated_at() set search_path = public, pg_catalog;
-alter function private.handle_new_user() set search_path = public, pg_catalog;
-alter function private.is_admin() set search_path = public, pg_catalog;
-alter function private.is_admin_or_editor() set search_path = public, pg_catalog;
-revoke all on function private.handle_new_user() from public;
-revoke all on function private.is_admin() from public;
-revoke all on function private.is_admin_or_editor() from public;
-revoke execute on function public.rls_auto_enable() from anon, authenticated, public;
+-- Security hardening is included in the canonical portfolio schema migration.
+-- Kept as an explicit migration checkpoint for existing environments.
