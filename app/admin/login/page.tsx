@@ -1,0 +1,9 @@
+'use client';
+import { FormEvent, useState } from 'react';
+import { createClient } from '@/lib/supabase/browser';
+
+export default function LoginPage() {
+  const [email,setEmail]=useState(''); const [password,setPassword]=useState(''); const [error,setError]=useState(''); const [loading,setLoading]=useState(false);
+  async function submit(e: FormEvent) { e.preventDefault(); setLoading(true); setError(''); const supabase=createClient(); const {error}=await supabase.auth.signInWithPassword({email,password}); if(error){setError('Invalid email or password.');setLoading(false);return;} window.location.href='/admin'; }
+  return <main className="min-h-screen grid place-items-center px-4"><form onSubmit={submit} className="w-full max-w-sm rounded-3xl border border-line bg-white p-8"><p className="text-sm text-muted">Sidhu Portfolio</p><h1 className="mt-2 text-3xl font-semibold">Admin sign in</h1><div className="mt-7 space-y-4"><label className="block text-sm">Email<input required type="email" autoComplete="email" value={email} onChange={e=>setEmail(e.target.value)} className="mt-2 w-full rounded-xl border border-line px-4 py-3 outline-none focus:border-ink" /></label><label className="block text-sm">Password<input required type="password" autoComplete="current-password" value={password} onChange={e=>setPassword(e.target.value)} className="mt-2 w-full rounded-xl border border-line px-4 py-3 outline-none focus:border-ink" /></label></div>{error&&<p className="mt-4 text-sm text-red-600">{error}</p>}<button disabled={loading} className="mt-6 w-full rounded-xl bg-ink px-4 py-3 text-sm font-medium text-white disabled:opacity-50">{loading?'Signing in…':'Sign in'}</button><a href="/" className="mt-5 block text-center text-sm text-muted">Back to site</a></form></main>;
+}
