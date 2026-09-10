@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { createClient } from '@/lib/supabase/browser';
 
 type Item = { id: string; [key: string]: any };
+type NewItem = { [key: string]: any };
 
 const fields: Record<string, string[]> = {
   skills: ['name', 'category', 'proficiency', 'sort_order', 'is_published'],
@@ -11,7 +12,7 @@ const fields: Record<string, string[]> = {
   achievements: ['title', 'issuer', 'date', 'description', 'url', 'sort_order', 'is_published'],
 };
 
-const defaults: Record<string, Item> = {
+const defaults: Record<string, NewItem> = {
   skills: { name: 'New skill', category: 'Other', proficiency: 50, sort_order: 999, is_published: true },
   projects: { title: 'New project', slug: `new-project-${Date.now()}`, short_description: 'Project summary', description: '', image_url: '', live_url: '', github_url: '', featured: false, sort_order: 999, is_published: false },
   experiences: { title: 'New role', organization: 'Organization', location: '', description: '', start_date: new Date().toISOString().slice(0, 10), end_date: null, is_current: false, sort_order: 999, is_published: false },
