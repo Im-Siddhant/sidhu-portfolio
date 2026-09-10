@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #f7f7f5; color: #111; font-family: var(--font-inter), system-ui, sans-serif; }
+::selection { background: #111; color: #fff; }
+.container-page { width: min(1120px, calc(100% - 32px)); margin-inline: auto; }
+.section { padding-block: 96px; }
+@media (max-width: 640px) { .section { padding-block: 64px; } }
